@@ -1,36 +1,22 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
+import { connect } from 'react-redux';
 
 import Input from './components/Input';
 import Button from './components/Button';
 import List from './components/List';
 
-import store from './store/store';
 import { addTodo } from './actions/actions';
 
 const title = 'My Minimal React Webpack Babel Setup!';
 
 class App extends Component {
-    state = store.getState();
-    
-    updateState = () => {
-        this.setState(store.getState())
-    }
-
     addTask = (event) => {
         event.preventDefault();
     
         const input = document.querySelector("input");
     
-        store.dispatch(addTodo(input.value));
-    }
-
-    componentDidMount() {
-        this.unsubscribe = store.subscribe(this.updateState);
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
+        this.props.dispatch(addTodo(input.value));
     }
 
     render() {
@@ -41,11 +27,19 @@ class App extends Component {
                     <Input /><Button addTodo={this.addTask}/>
                 </div>
                 <div>
-                    <List items={this.state.items}/>
+                    <List items={this.props.items}/>
                 </div>
             </div>
         )    
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        items: state.items
+    }
+};
+
+App = connect(mapStateToProps)(App);
 
 export default hot(module)(App)

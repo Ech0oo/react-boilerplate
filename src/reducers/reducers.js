@@ -1,7 +1,7 @@
 import { ADD_TODO } from './../actions/actions';
 
 const initialState = {
-    "items": [1, 2, 3]
+    "items": ["1", "2", "3"]
 };
 
 export default function todoApp(state = initialState, action) {
