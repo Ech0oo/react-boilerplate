@@ -1,7 +1,14 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { logger } from 'redux-logger';
 
-import todoApp from './../reducers/reducers'
+import reducer from './../reducers';
 
-const store = createStore(todoApp)
+const initialState = {
+    "items": ["1", "2", "3"],
+    "isFetching": false
+};
+
+const store = createStore(reducer, initialState, applyMiddleware(thunkMiddleware, logger));
 
 export default store;

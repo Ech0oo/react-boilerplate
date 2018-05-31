@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Input from './components/Input';
 import Button from './components/Button';
 import List from './components/List';
+import Select from './components/Select';
 
 import { addTodo } from './actions/actions';
 
@@ -25,6 +26,9 @@ class App extends Component {
                 <div>{title}</div>
                 <div>
                     <Input /><Button addTodo={this.addTask}/>
+                </div>
+                <div>
+                    <Select />
                 </div>
                 <div>
                     <List items={this.props.items}/>
