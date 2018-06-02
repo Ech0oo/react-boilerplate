@@ -7,6 +7,8 @@ class Select extends Component {
     }
 
     toggleCheckboxChange = () => {
+        this.state.isChecked ? this.props.removeTodoLoaded() : this.props.fetchTasks()
+
         this.setState({
             isChecked: !this.state.isChecked,
         });

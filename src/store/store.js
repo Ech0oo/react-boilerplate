@@ -5,7 +5,19 @@ import { logger } from 'redux-logger';
 import reducer from './../reducers';
 
 const initialState = {
-    "items": ["1", "2", "3"],
+    "items": [{
+            title: "1",
+            loaded: false
+        },
+        {
+            title: "2",
+            loaded: false
+        },
+        {
+            title: "3",
+            loaded: false
+        }
+    ],
     "isFetching": false
 };
 

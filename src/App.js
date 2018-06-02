@@ -7,7 +7,7 @@ import Button from './components/Button';
 import List from './components/List';
 import Select from './components/Select';
 
-import { addTodo } from './actions/actions';
+import { addTodo, fetchTasks, removeTodoLoaded } from './actions/actions';
 
 const title = 'My Minimal React Webpack Babel Setup!';
 
@@ -17,7 +17,7 @@ class App extends Component {
     
         const input = document.querySelector("input");
     
-        this.props.dispatch(addTodo(input.value));
+        this.props.createTodo(input.value);
     }
 
     render() {
@@ -25,13 +25,13 @@ class App extends Component {
             <div>
                 <div>{title}</div>
                 <div>
-                    <Input /><Button addTodo={this.addTask}/>
+                    <Input /><Button addTodo={this.addTask} />
                 </div>
                 <div>
-                    <Select />
+                    <Select fetchTasks={this.props.fetchTodos} removeTodoLoaded={this.props.removeTodoLoaded} />
                 </div>
                 <div>
-                    <List items={this.props.items}/>
+                    <List items={this.props.items} />
                 </div>
             </div>
         )    
@@ -44,6 +44,14 @@ const mapStateToProps = (state) => {
     }
 };
 
-App = connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createTodo: (text) => dispatch(addTodo(text)),
+        fetchTodos: () => dispatch(fetchTasks()),
+        removeTodoLoaded: () => dispatch(removeTodoLoaded())
+    }
+};
+
+App = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default hot(module)(App)

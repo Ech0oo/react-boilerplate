@@ -7,8 +7,8 @@ class List extends Component {
     render() {
         return (
             <ul>
-                {this.props.items.map((value, index) => {
-                    return <ListItem item={value} key={index} />
+                {this.props.items.map((item, index) => {
+                    return <ListItem item={item.title} key={index} />
                 })}
             </ul> 
         )
